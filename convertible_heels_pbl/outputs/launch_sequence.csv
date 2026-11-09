@@ -1,0 +1,11 @@
+Phase,Feature,Demand among likely buyers,Why
+Phase 1 - Launch,Orthopaedic cushioned insole,0.5786646201074443,Top-4 demand: 58% of likely buyers want it
+Phase 1 - Launch,Click-lock safety mechanism,0.4804297774366846,Top-4 demand: 48% of likely buyers want it
+Phase 1 - Launch,Kitten heel module,0.4466615502686109,Top-4 demand: 45% of likely buyers want it
+Phase 1 - Launch,Block heel module,0.4382194934765925,Top-4 demand: 44% of likely buyers want it
+Phase 1 - Launch,Travel pouch for heels,0.31312356101304684,Bundled: 67% of buyers who want Kitten heel module + Block heel module also want it (lift 2.14)
+Phase 2 - Month 6-9,Stiletto heel module,0.4244052187260169,Demand 42%; added once launch features are proven
+Phase 2 - Month 6-9,Interchangeable straps,0.37068303914044515,Demand 37%; added once launch features are proven
+Phase 2 - Month 6-9,Custom colours / prints,0.23254029163468917,Demand 23%; added once launch features are proven
+Phase 3 - Year 2,Wedge heel module,0.17421335379892555,Demand 17%; added once launch features are proven
+Phase 3 - Year 2,Heel replacement subscription,0.15425940138142746,Demand 15%; added once launch features are proven

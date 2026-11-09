@@ -1,0 +1,37 @@
+step,action,reason,records_affected
+0. Start,"Loaded 2,035 rows x 32 columns",Raw survey export,2035
+1. Duplicates,Removed duplicate submissions (same respondent_id),A person who pressed 'Submit' twice would be counted twice and bias every %,35
+2a. City names,"Mapped spelling variants (Bombay, Bangalore, Gurgaon, Madras...) to one standard name",Same city written 3 ways would look like 3 different markets,144
+2b. Occupation,Fixed lower-case / extra-space occupation labels,Category counts must not split because of letter case,60
+2c. Purchase intent (target),"Mapped 'Y', 'yes', 'Definitely', 'Nope', 'Not sure'... to Yes / No / Maybe",The classification label must have exactly 3 clean classes,118
+2d. Purchase intent (target),Dropped rows with no usable intent answer,Cannot train or test a classifier on a row with no label,0
+4. Impossible values,age: set 5 impossible values to missing,Survey is for women 16-75; ages like 4 or 150 are typos,5
+4. Impossible values,hours_on_feet: set 6 impossible values to missing,Nobody stands more than 18 h a day; 24/30/48 are typos,6
+4. Impossible values,annual_footwear_spend_inr: set 5 impossible values to missing,Spending cannot be negative,5
+4. Impossible values,heel_pairs_owned: set 4 impossible values to missing,150-300 pairs of heels is not credible for this survey,4
+4. Impossible values,wtp_base_inr: set 10 impossible values to missing,"Below ₹300 or above ₹25,000 for a sandal is a joke/typo answer",10
+4. Impossible values,carry_extra_pair: values outside the 1-5 scale set to missing,"A 1-5 Likert scale cannot contain 0, 6 or 7",12
+4. Impossible values,importance_comfort: values outside the 1-5 scale set to missing,"A 1-5 Likert scale cannot contain 0, 6 or 7",12
+4. Impossible values,trust_d2c_brands: values outside the 1-5 scale set to missing,"A 1-5 Likert scale cannot contain 0, 6 or 7",12
+4. Impossible values,influencer_influence: values outside the 1-5 scale set to missing,"A 1-5 Likert scale cannot contain 0, 6 or 7",12
+5. Outliers,"monthly_income_inr: capped 11 values at Q3 + 3xIQR (₹264,950)",Very high values are possible but would distort means and regression; capping keeps the row,11
+5. Outliers,"annual_footwear_spend_inr: capped 16 values at Q3 + 3xIQR (₹90,500)",Very high values are possible but would distort means and regression; capping keeps the row,16
+5. Outliers,"max_price_paid_inr: capped 19 values at Q3 + 3xIQR (₹28,100)",Very high values are possible but would distort means and regression; capping keeps the row,19
+6. Missing values,monthly_income_inr: filled with the median income of the same occupation,A student's missing income should not be filled with a professional's income,89
+6. Missing values,age: filled 44 blanks with the median,Median is robust to the skew/outliers seen in survey answers,44
+6. Missing values,hours_on_feet: filled 36 blanks with the median,Median is robust to the skew/outliers seen in survey answers,36
+6. Missing values,heel_pairs_owned: filled 4 blanks with the median,Median is robust to the skew/outliers seen in survey answers,4
+6. Missing values,annual_footwear_spend_inr: filled 5 blanks with the median,Median is robust to the skew/outliers seen in survey answers,5
+6. Missing values,pain_severity: filled 40 blanks with the median,Median is robust to the skew/outliers seen in survey answers,40
+6. Missing values,wtp_base_inr: filled 70 blanks with the median,Median is robust to the skew/outliers seen in survey answers,70
+6. Missing values,wtp_extra_heel_inr: filled 50 blanks with the median,Median is robust to the skew/outliers seen in survey answers,50
+6. Missing values,carry_extra_pair: filled 12 blanks with the median,Median is robust to the skew/outliers seen in survey answers,12
+6. Missing values,importance_comfort: filled 12 blanks with the median,Median is robust to the skew/outliers seen in survey answers,12
+6. Missing values,trust_d2c_brands: filled 12 blanks with the median,Median is robust to the skew/outliers seen in survey answers,12
+6. Missing values,influencer_influence: filled 12 blanks with the median,Median is robust to the skew/outliers seen in survey answers,12
+6. Missing values,city: filled 20 blanks with the most common answer (mode),Categorical column; mode is the standard fill and affects < 2% of rows,20
+6. Missing values,preferred_channel: filled 40 blanks with the most common answer (mode),Categorical column; mode is the standard fill and affects < 2% of rows,40
+7a. One-hot encoding,Split the 5 multi-select questions ('A; B; C') into 0/1 columns + a count column,Algorithms need one column per option; association rules need item baskets,2000
+7b. Ordinal encoding,heel_frequency (Never ... Daily) -> score 0-5,Keeps the natural order so models understand 'Daily' > 'Weekly',2000
+7c. New features,"Created city_tier, age_group, income_band, drives_self, aware_flag, intent_yes, intent_score, log_income, footwear_share_of_income",Bands are for readable charts; log/ratio features help models; numeric age/income are kept for algorithms,2000
+8. Final,"Clean dataset: 2,000 rows x 81 columns, 0 missing values in model columns",Ready for EDA and the 4 algorithms,2000

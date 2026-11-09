@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 .claude/
 .DS_Store
+.venv-heels/
+
+# Convertto submission files kept off GitHub (report, assistant notes, zip)
+convertible_heels_pbl/CLAUDE.md
+convertible_heels_pbl/Convertto_Report.*
+Convertto_Individual_PBL.zip
